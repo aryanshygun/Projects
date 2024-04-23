@@ -1,18 +1,11 @@
 # in this code we create the models and add to the database
 import os
 from peewee import *
-from Super_admins import superadmins
+from Super_admins import *
 
 class Defaultmodel(Model):
     class Meta:
         database = SqliteDatabase('Main DataBase.db')
-
-class Workplaces(Defaultmodel):
-    career_path = CharField(unique = True, index = True)
-    salary_per_month = CharField()
-    max_employee = IntegerField()
-    experience_required = IntegerField()
-    age_limit = IntegerField()
 
 class Recruiters(Defaultmodel):
     username = CharField(unique = True, index = True)    
@@ -28,9 +21,15 @@ class Employees(Defaultmodel):
     last_name = CharField()
     password = CharField()
     profession = CharField()
-    age = IntegerField()
     experience = IntegerField()    
     is_logged = BooleanField()
+
+class Careers(Defaultmodel):
+    career = CharField(unique = True, index = True)
+    salary_per_month = CharField()
+    available_spots = IntegerField()
+    experience_required = IntegerField()
+
 
 db = SqliteDatabase('Main DataBase.db')
 
@@ -38,12 +37,12 @@ class Actions:
     @staticmethod
     def add_tables():
         db.connect()
-        db.create_tables([Workplaces,Recruiters, Employees])
+        db.create_tables([Careers,Recruiters, Employees])
 
     @staticmethod
     def drop_tables():
         with db:
-            db.drop_tables([Workplaces, Employees, Recruiters])
+            db.drop_tables([Careers, Employees, Recruiters])
     
     @staticmethod
     def add_super_admins():
@@ -56,31 +55,18 @@ class Actions:
                 is_superadmin = True,
                 is_logged = False     
             )
-    
+    @staticmethod        
+    def add_careers():
+        for i in careers:
+            Careers.create(
+                career = careers[i]['career'],
+                salary_per_month = careers[i]['salary_per_month'],
+                available_spots = careers[i]['available_spots'],
+                experience_required = careers[i]['experience_required']
+            )
+        
 def execute_db():
     if not os.path.exists('Main DataBase.db'):
         Actions.add_tables()
         Actions.add_super_admins()
-    else:
-        Actions.drop_tables()
-        Actions.add_tables()
-        Actions.add_super_admins()
-    # Actions.add_tables()
-    # Actions.add_super_admins()
-
-# def drop_db():
-#     Actions.drop_tables()
-
-if __name__ == '__main__':
-    execute_db()
-    
-# execute_db()
-# x = 'aaamir'
-# user_to_change = Recruiters.get(Recruiters.username == 'amir')  # Change condition to match user ID
-# user_to_change.username = x
-# user_to_change.save()
-
-# user = Recruiters.get(Recruiters.username == 'amir')
-# user.is_logged = True
-# user.save()
-# print(user.is_logged)
+        Actions.add_careers()
