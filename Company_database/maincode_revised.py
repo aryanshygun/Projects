@@ -17,8 +17,9 @@ class init_workplace:
         
     def login(self):
         self.header()
+        print('Hello there! State your class:\n0 - Admin\n1 - Employee\n2 - Exit')
         while True:
-            log_status = input("Hello there! State your class:\n0 - Admin\n1 - Employee\n2 - Exit\n")
+            log_status = input()
             if log_status == '0':
                 self.check_logger(Recruiters)
                 break

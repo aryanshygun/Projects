@@ -40,11 +40,6 @@ class Actions:
         db.create_tables([Careers,Recruiters, Employees])
 
     @staticmethod
-    def drop_tables():
-        with db:
-            db.drop_tables([Careers, Employees, Recruiters])
-    
-    @staticmethod
     def add_super_admins():
         for admin in superadmins:
             Recruiters.create(
