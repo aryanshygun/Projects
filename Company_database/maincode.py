@@ -101,9 +101,7 @@ class init_workplace:
     ############################################  
     
     def register_recruiter(self):
-        
-        # while True:
-            
+
         User_username = input("Enter the person's User name:\n")
         
         while True:
@@ -162,7 +160,19 @@ class init_workplace:
      
     def register_employee(self):
         
-        career_path = input("Enter the potential employee's profession:\n")           
+        career_path = input("Enter the potential employee's profession:\n T for teacher - E for engineer - W for worker\n")        
+        while True:   
+            if career_path == 'T':
+                career_path = 'teacher'
+                break
+            elif career_path == 'E':
+                career_path = 'engineer'
+                break
+            elif career_path == 'W':
+                career_path = 'worker'
+                break
+            else:
+                print('Invalid response. Try again!\n')
         spots_left = Careers.get(Careers.career == career_path)
         
         if spots_left.available_spots != 0:
@@ -171,16 +181,21 @@ class init_workplace:
             spots_left.available_spots -= 1
             spots_left.save()
             username = input("Enter the person's username:\n")
-            
+
             if not Employees.select().where(Employees.username == username).exists():
                 
+                exp = int(input('How many years of experience do they have?\n'))
+                
+                if exp < spots_left.experience_required:
+                    print('Sorry, they dont have enough experience for this career.\n')
+                    self.banner()
                 Employees.create(
                     username = username,
-                    password = input("Enter the person's desired password: \n"),
                     first_name = username.title(),
                     last_name = input("Enter the person's last name: \n"),
+                    password = input("Enter the person's desired password: \n"),
                     profession = career_path,
-                    experience = int(input('How many years of experience?\n')),
+                    experience = exp,
                     is_logged = False
                     )
                 print("--------------------------------------------------")
@@ -196,8 +211,17 @@ class init_workplace:
     
     def fire_employee(self):
         is_empty = (Employees.select().count() == 0)
+
         if is_empty:
             print('There are no employees to terminate!\n')
+        self.view_employees()
+        print("--------------------------------------------------")
+        number = int(input('Select the number of the employee you want to terminate: \n'))
+        terminate = Employees.get(Employees.id == number)
+        
+        terminate.delete_instance()
+        print("--------------------------------------------------")
+        print(f"Employee number {number} has been terminated.\n")
         
         
                     
@@ -453,4 +477,6 @@ class init_workplace:
                 
                       
 app = init_workplace()
-app.login()
+
+if __name__=='__main__':
+    app.login()

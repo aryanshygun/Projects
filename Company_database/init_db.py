@@ -5,7 +5,7 @@ from Super_admins import *
 
 class Defaultmodel(Model):
     class Meta:
-        database = SqliteDatabase('Main DataBase.db')
+        database = SqliteDatabase('Projects/Company_database/Main Database.db')
 
 class Recruiters(Defaultmodel):
     username = CharField(unique = True, index = True)    
@@ -31,7 +31,7 @@ class Careers(Defaultmodel):
     experience_required = IntegerField()
 
 
-db = SqliteDatabase('Main DataBase.db')
+db = SqliteDatabase('Projects/Company_database/Main Database.db')
 
 class Actions:
     @staticmethod
@@ -66,7 +66,7 @@ class Actions:
             )
         
 def execute_db():
-    if not os.path.exists('Main DataBase.db'):
+    if not os.path.exists('Projects/Company_database/Main Database.db'):
         Actions.add_tables()
         Actions.add_super_admins()
         Actions.add_careers()
