@@ -1,0 +1,65 @@
+{
+    "bijan": {
+        "first_name": "Bijan",
+        "last_name": "Ahmadi",
+        "password": "123",
+        "bio": "bijantine",
+        "isadmin": true
+    },
+    "amir": {
+        "first_name": "Amir",
+        "last_name": "Shygun",
+        "password": "456",
+        "bio": "ryanole",
+        "isadmin": true
+    },
+    "ali": {
+        "first_name": "Ali",
+        "last_name": "Sdvds",
+        "password": "123",
+        "bio": "aliar",
+        "isadmin": false
+    },
+    "fed": {
+        "first_name": "Fed",
+        "last_name": "Dfb",
+        "password": "2434",
+        "bio": "34v",
+        "isadmin": false
+    },
+    "dorsa": {
+        "first_name": "Dorsa",
+        "last_name": "34Gwr",
+        "password": "3423",
+        "bio": "sv",
+        "isadmin": false
+    },
+    "poria": {
+        "first_name": "Poria",
+        "last_name": "Fbre",
+        "password": "2423",
+        "bio": "eerb",
+        "isadmin": false
+    },
+    "yazdan": {
+        "first_name": "Yazdan",
+        "last_name": "Dbfefbe",
+        "password": "24525",
+        "bio": "erdb",
+        "isadmin": false
+    },
+    "sdfbsd": {
+        "first_name": "Sdfbsd",
+        "last_name": "Aefbe",
+        "password": "123",
+        "bio": "dsfbssb",
+        "isadmin": false
+    },
+    "svvafb": {
+        "first_name": "Svvafb",
+        "last_name": "Ebewb",
+        "password": "123",
+        "bio": "wfsgfdb",
+        "isadmin": false
+    }
+}
